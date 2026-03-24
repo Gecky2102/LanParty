@@ -35,6 +35,17 @@ app.get('/admin/login', (req, res) => {
   res.sendFile(path.join(staticDir, 'admin-login.html'));
 });
 
+app.post('/admin/login-check', (req, res) => {
+  const { username, password } = req.body || {};
+  const ok = username === env.adminUser && password === env.adminPassword;
+
+  if (!ok) {
+    return res.status(200).json({ ok: false, message: 'Credenziali admin non valide' });
+  }
+
+  return res.status(200).json({ ok: true });
+});
+
 app.use(publicRoutes);
 app.use(adminRoutes);
 

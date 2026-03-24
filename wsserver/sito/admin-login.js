@@ -20,15 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
         status.classList.add('status-neutral');
     }
 
-    async function verifyCredentials(authHeader) {
-        const response = await fetch('/admin', {
-            method: 'GET',
+    async function verifyCredentials(username, password) {
+        const response = await fetch('/admin/login-check', {
+            method: 'POST',
             headers: {
-                Authorization: authHeader
-            }
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
         });
 
-        return response;
+        if (!response.ok) {
+            throw new Error('Errore server');
+        }
+
+        const json = await response.json();
+        return Boolean(json.ok);
     }
 
     form.addEventListener('submit', async (event) => {
@@ -46,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus('Verifica credenziali in corso...', 'neutral');
 
         try {
-            const response = await verifyCredentials(authHeader);
-            if (!response.ok) {
+            const ok = await verifyCredentials(username, password);
+            if (!ok) {
                 setStatus('Credenziali non valide.', 'error');
                 return;
             }

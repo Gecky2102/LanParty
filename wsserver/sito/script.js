@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rankWrap = li.querySelector('.rank-wrap');
         const label = document.createElement('span');
         label.className = 'podium-label';
-        label.textContent = index === 0 ? '1 posto' : index === 1 ? '2 posto' : '3 posto';
+        label.textContent = index === 0 ? '1° posto' : index === 1 ? '2° posto' : '3° posto';
         rankWrap.prepend(label);
         return li;
     }
