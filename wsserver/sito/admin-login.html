@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lan Party - Login Admin</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin-login.css" />
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-card">
+      <p class="eyebrow">Lan Party 2025/2026</p>
+      <h1>Accesso Admin</h1>
+      <p class="subtitle">Autenticati per aprire la dashboard di gestione.</p>
+
+      <form id="login-form" class="login-form">
+        <label>
+          User
+          <input id="admin-user" type="text" autocomplete="username" required />
+        </label>
+
+        <label>
+          Password
+          <input id="admin-password" type="password" autocomplete="current-password" required />
+        </label>
+
+        <button type="submit">Accedi</button>
+      </form>
+
+      <p id="login-status" class="status">Inserisci le credenziali admin.</p>
+
+      <div class="links">
+        <a href="/">Torna alla classifica</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-login.js"></script>
+</body>
+</html>

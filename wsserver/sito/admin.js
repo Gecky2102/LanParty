@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const userInput = document.getElementById('admin-user');
-    const passwordInput = document.getElementById('admin-password');
-    const loginBtn = document.getElementById('login-btn');
     const logoutBtn = document.getElementById('logout-btn');
     const backupBtn = document.getElementById('backup-btn');
     const resetBtn = document.getElementById('reset-btn');
@@ -18,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const AUTH_KEY = 'lanparty_admin_basic_auth';
     let authHeader = sessionStorage.getItem(AUTH_KEY) || '';
 
+    function redirectToLogin() {
+        window.location.href = '/admin/login';
+    }
+
     function setAuthStatus(message) {
         authStatus.textContent = message;
     }
@@ -32,18 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resetBtn.disabled = !loggedIn;
         reloadBtn.disabled = !loggedIn;
         createForm.querySelector('button[type="submit"]').disabled = !loggedIn;
-    }
-
-    function buildAuthHeader() {
-        const username = userInput.value.trim();
-        const password = passwordInput.value;
-
-        if (!username || !password) {
-            setAuthStatus('Inserisci user e password admin.');
-            return '';
-        }
-
-        return `Basic ${btoa(`${username}:${password}`)}`;
     }
 
     async function adminFetch(path, options = {}) {
@@ -194,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadStudents() {
         if (!authHeader) {
-            renderPlaceholder('Accedi come admin per gestire i dati.');
+            redirectToLogin();
             return;
         }
 
@@ -220,8 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
             rowsInfo.textContent = `${students.length} record`;
         } catch (error) {
             if (error.message === 'UNAUTHORIZED') {
-                setAuthStatus('Sessione scaduta o credenziali non valide.');
-                renderPlaceholder('Accedi di nuovo per visualizzare i dati.');
+                setAuthStatus('Sessione scaduta. Reindirizzamento al login...');
+                renderPlaceholder('Sessione non valida.');
+                setTimeout(redirectToLogin, 700);
                 return;
             }
 
@@ -230,42 +220,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function login() {
-        const candidateAuth = buildAuthHeader();
-        if (!candidateAuth) {
-            return;
-        }
-
-        try {
-            authHeader = candidateAuth;
-            const response = await adminFetch('/admin');
-
-            if (!response.ok) {
-                const errJson = await response.json();
-                throw new Error(errJson.message || 'Credenziali non valide');
-            }
-
-            sessionStorage.setItem(AUTH_KEY, authHeader);
-            setAuthStatus('Autenticato come admin.');
-            setActionStatus('Login eseguito.');
-            updateButtonsState();
-            await loadStudents();
-        } catch (error) {
-            authHeader = '';
-            sessionStorage.removeItem(AUTH_KEY);
-            updateButtonsState();
-            setAuthStatus(`Login fallito: ${error.message}`);
-            renderPlaceholder('Accesso admin richiesto.');
-        }
-    }
-
     function logout() {
         authHeader = '';
         sessionStorage.removeItem(AUTH_KEY);
-        setAuthStatus('Disconnesso.');
-        setActionStatus('Sessione admin chiusa.');
+        setAuthStatus('Disconnessione...');
+        setActionStatus('Sessione admin chiusa. Reindirizzamento...');
         updateButtonsState();
-        renderPlaceholder('Accedi come admin per gestire i dati.');
+        setTimeout(redirectToLogin, 300);
     }
 
     async function doBackup() {
@@ -361,7 +322,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loginBtn.addEventListener('click', login);
     logoutBtn.addEventListener('click', logout);
     backupBtn.addEventListener('click', doBackup);
     resetBtn.addEventListener('click', doReset);
@@ -371,9 +331,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateButtonsState();
 
     if (authHeader) {
-        setAuthStatus('Sessione admin ripristinata.');
+        setAuthStatus('Sessione admin attiva.');
         loadStudents();
     } else {
-        renderPlaceholder('Accedi come admin per gestire i dati.');
+        redirectToLogin();
     }
 });

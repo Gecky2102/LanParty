@@ -1,0 +1,105 @@
+:root {
+  --text: #1e293b;
+  --muted: #5b6472;
+  --panel: #ffffff;
+  --panel-border: #d9e0e8;
+  --accent: #1d4ed8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Nunito Sans", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f8fafc 0%, #f2f5f8 100%);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.login-page {
+  width: min(460px, 100%);
+}
+
+.login-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  padding: 18px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  color: #334155;
+}
+
+h1 {
+  margin: 6px 0 4px;
+  font-family: "Literata", serif;
+  font-size: clamp(1.7rem, 3vw, 2.1rem);
+}
+
+.subtitle {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.login-form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+input {
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  padding: 9px 10px;
+  font: inherit;
+}
+
+button {
+  margin-top: 4px;
+  border: 1px solid #1d4ed8;
+  background: #1d4ed8;
+  color: #fff;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.status {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.links {
+  margin-top: 10px;
+}
+
+.links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}

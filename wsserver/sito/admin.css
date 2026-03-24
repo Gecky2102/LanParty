@@ -35,6 +35,12 @@ body {
   gap: 16px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .eyebrow {
   margin: 0;
   font-size: 0.74rem;
@@ -79,10 +85,8 @@ h2 {
   padding: 14px;
 }
 
-.login-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.session-card {
+  padding: 10px 14px;
 }
 
 label {
@@ -221,8 +225,9 @@ th {
     flex-direction: column;
   }
 
-  .login-grid {
-    grid-template-columns: 1fr;
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .inline-form {

@@ -18,26 +18,14 @@
         <h1>Dashboard Admin</h1>
         <p class="subtitle">Gestione completa dei punteggi e backup database.</p>
       </div>
-      <a class="back-link" href="/">Torna alla classifica</a>
-    </header>
-
-    <section class="card login-card">
-      <h2>Accesso Admin</h2>
-      <div class="login-grid">
-        <label>
-          User
-          <input id="admin-user" type="text" placeholder="admin" autocomplete="username" />
-        </label>
-        <label>
-          Password
-          <input id="admin-password" type="password" placeholder="password" autocomplete="current-password" />
-        </label>
-      </div>
-      <div class="actions">
-        <button id="login-btn" type="button">Accedi</button>
+      <div class="header-actions">
+        <a class="back-link" href="/">Torna alla classifica</a>
         <button id="logout-btn" type="button" class="secondary">Esci</button>
       </div>
-      <p id="auth-status" class="status">Non autenticato</p>
+    </header>
+
+    <section class="card session-card">
+      <p id="auth-status" class="status">Sessione admin attiva.</p>
     </section>
 
     <section class="card tools-card">

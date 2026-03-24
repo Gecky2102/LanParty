@@ -31,6 +31,10 @@ app.get('/admin/dashboard', (req, res) => {
   res.sendFile(path.join(staticDir, 'admin.html'));
 });
 
+app.get('/admin/login', (req, res) => {
+  res.sendFile(path.join(staticDir, 'admin-login.html'));
+});
+
 app.use(publicRoutes);
 app.use(adminRoutes);
 
