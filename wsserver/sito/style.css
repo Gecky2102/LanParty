@@ -13,7 +13,6 @@
   --gold-bg:        #fffbeb;
   --gold-border:    #fcd34d;
   --gold-badge:     #f59e0b;
-  --gold-glow:      rgba(245, 158, 11, 0.3);
 
   --silver:         #475569;
   --silver-bg:      #f8fafc;
@@ -24,7 +23,6 @@
   --bronze-bg:      #fff7ed;
   --bronze-border:  #fdba74;
   --bronze-badge:   #d97706;
-  --bronze-glow:    rgba(217, 119, 6, 0.25);
 }
 
 *, *::before, *::after {
@@ -121,9 +119,9 @@ body {
 
 .ranking-card h2 {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 18px;
@@ -184,22 +182,22 @@ body {
 /* Riordine e altezze a scalino */
 .podium-list li.first-place {
   order: 2;
-  min-height: 200px;
+  min-height: 220px;
   background: var(--gold-bg);
   border-color: var(--gold-border);
-  padding-top: 22px;
+  padding-top: 24px;
 }
 
 .podium-list li.second-place {
   order: 1;
-  min-height: 162px;
+  min-height: 178px;
   background: var(--silver-bg);
   border-color: var(--silver-border);
 }
 
 .podium-list li.third-place {
   order: 3;
-  min-height: 136px;
+  min-height: 150px;
   background: var(--bronze-bg);
   border-color: var(--bronze-border);
 }
@@ -232,32 +230,32 @@ body {
 }
 
 .podium-list li.first-place .rank-badge {
-  width: 56px;
-  height: 56px;
-  font-size: 1.35rem;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
   background: var(--gold-badge);
   color: #fff;
-  box-shadow: 0 4px 18px var(--gold-glow);
 }
 
 .podium-list li.second-place .rank-badge {
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
   background: var(--silver-badge);
   color: #fff;
 }
 
 .podium-list li.third-place .rank-badge {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  font-size: 1.1rem;
   background: var(--bronze-badge);
   color: #fff;
-  box-shadow: 0 3px 12px var(--bronze-glow);
 }
 
 /* Nome nel podio */
 .podium-list .section {
-  font-size: 0.88rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
   overflow-wrap: anywhere;
@@ -267,7 +265,7 @@ body {
 /* Punteggio nel podio */
 .podium-list .points {
   font-family: 'Literata', serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   text-align: center;
 }
@@ -323,18 +321,17 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 11px 14px;
+  padding: 13px 16px;
   display: grid;
   grid-template-columns: 76px 1fr auto;
   align-items: center;
   gap: 12px;
-  transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+  transition: border-color 150ms ease, transform 150ms ease;
 }
 
 .leaderboard li:hover {
   border-color: var(--border-strong);
   transform: translateX(2px);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
 }
 
 /* Righe stato */
@@ -364,31 +361,31 @@ body {
 }
 
 .rank-badge {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   border-radius: 8px;
   display: grid;
   place-items: center;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 700;
   background: #e2e8f0;
-  color: var(--muted);
+  color: #475569;
   flex-shrink: 0;
 }
 
 .section {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--text);
   overflow-wrap: anywhere;
 }
 
 .points {
   font-family: 'Literata', serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #475569;
   text-align: right;
   white-space: nowrap;
 }
@@ -402,7 +399,6 @@ body {
 .leaderboard li.first-place .rank-badge {
   background: var(--gold-badge);
   color: #fff;
-  box-shadow: 0 2px 8px var(--gold-glow);
 }
 .leaderboard li.first-place .points { color: var(--gold); }
 
@@ -463,11 +459,11 @@ body {
   .points { text-align: left; margin-left: 37px; }
   .board-footer { justify-content: flex-start; }
 
-  .podium-list li.first-place  { min-height: 165px; }
-  .podium-list li.second-place { min-height: 135px; }
-  .podium-list li.third-place  { min-height: 112px; }
+  .podium-list li.first-place  { min-height: 180px; }
+  .podium-list li.second-place { min-height: 148px; }
+  .podium-list li.third-place  { min-height: 124px; }
 
-  .podium-list li.first-place .rank-badge  { width: 46px; height: 46px; font-size: 1.1rem; }
-  .podium-list li.second-place .rank-badge { width: 38px; height: 38px; }
-  .podium-list li.third-place .rank-badge  { width: 34px; height: 34px; }
+  .podium-list li.first-place .rank-badge  { width: 50px; height: 50px; font-size: 1.2rem; }
+  .podium-list li.second-place .rank-badge { width: 42px; height: 42px; font-size: 1rem; }
+  .podium-list li.third-place .rank-badge  { width: 38px; height: 38px; font-size: 0.95rem; }
 }
