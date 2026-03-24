@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lan Party - Dashboard Admin</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <main class="admin-page">
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Lan Party 2025/2026</p>
+        <h1>Dashboard Admin</h1>
+        <p class="subtitle">Gestione completa dei punteggi e backup database.</p>
+      </div>
+      <a class="back-link" href="/">Torna alla classifica</a>
+    </header>
+
+    <section class="card login-card">
+      <h2>Accesso Admin</h2>
+      <div class="login-grid">
+        <label>
+          User
+          <input id="admin-user" type="text" placeholder="admin" autocomplete="username" />
+        </label>
+        <label>
+          Password
+          <input id="admin-password" type="password" placeholder="password" autocomplete="current-password" />
+        </label>
+      </div>
+      <div class="actions">
+        <button id="login-btn" type="button">Accedi</button>
+        <button id="logout-btn" type="button" class="secondary">Esci</button>
+      </div>
+      <p id="auth-status" class="status">Non autenticato</p>
+    </section>
+
+    <section class="card tools-card">
+      <h2>Operazioni Database</h2>
+      <div class="actions wrap">
+        <button id="backup-btn" type="button">Scarica Backup JSON</button>
+        <button id="reset-btn" type="button" class="danger">Reset Totale Tabella</button>
+        <button id="reload-btn" type="button" class="secondary">Ricarica Dati</button>
+      </div>
+      <p class="hint">Il reset elimina tutti gli studenti. Azione irreversibile.</p>
+    </section>
+
+    <section class="card create-card">
+      <h2>Aggiungi Studente</h2>
+      <form id="create-form" class="inline-form">
+        <input id="new-username" type="text" placeholder="Username" required />
+        <input id="new-sezione" type="text" placeholder="Sezione (es. 2B)" required />
+        <input id="new-punteggio" type="number" placeholder="Punteggio" value="0" required />
+        <button type="submit">Aggiungi</button>
+      </form>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-head">
+        <h2>Studenti</h2>
+        <span id="rows-info" class="rows-info">0 record</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Sezione</th>
+              <th>Punteggio</th>
+              <th>Gestione</th>
+            </tr>
+          </thead>
+          <tbody id="students-body">
+            <tr>
+              <td colspan="5" class="placeholder">Accedi come admin per gestire i dati.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="action-status" class="status">Pronto.</p>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

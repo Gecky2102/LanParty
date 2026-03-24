@@ -1,19 +1,19 @@
 {
-    "name": "your-project-name",
+    "name": "lanparty-server",
     "version": "1.0.0",
-    "description": "A simple Node.js project with Express",
-    "main": "index.js",
+    "description": "Lan Party score service with public leaderboard and admin dashboard",
+    "main": "src/server.js",
     "scripts": {
-        "start": "node index.js",
-        "dev": "nodemon index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node src/server.js",
+        "dev": "nodemon src/server.js",
+        "check": "node --check src/server.js && node --check src/app.js"
     },
     "keywords": [
         "express",
         "nodejs",
         "web"
     ],
-    "author": "Your Name",
+    "author": "LanParty Team",
     "license": "ISC",
     "dependencies": {
         "express": "^4.18.2",

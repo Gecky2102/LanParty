@@ -31,9 +31,44 @@ Authorization: Basic YWRtaW46QGRtaW4h
 content-type: application/json
 
 {
+    "action": "createStudent",
+    "username": "nuovo_studente",
+    "sezione": "3A",
+    "punteggio": 12
+}
+
+###
+POST http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+content-type: application/json
+
+{
     "action": "setScore",
     "id": 1,
     "punteggio": 100
+}
+
+###
+POST http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+content-type: application/json
+
+{
+    "action": "updateStudent",
+    "id": 1,
+    "username": "mario",
+    "sezione": "4B",
+    "punteggio": 99
+}
+
+###
+POST http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+content-type: application/json
+
+{
+    "action": "deleteStudent",
+    "id": 1
 }
 
 ###
