@@ -11,8 +11,7 @@ services:
       ADMIN_USER: ${ADMIN_USER}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     depends_on:
-      mysql:
-        condition: service_healthy
+      - mysql
     restart: unless-stopped
 
   mysql:
@@ -22,12 +21,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - mysql_data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-      start_period: 30s
     restart: unless-stopped
 
 volumes:
