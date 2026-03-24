@@ -3,9 +3,9 @@ POST http://classifica.gmasiero.it/studente HTTP/1.1
 content-type: application/json
 
 {
-    "username": "aura",
-    "punteggio": "20",
-    "sezione": "2b"
+    "username": "provaa",
+    "punteggio": "100",
+    "sezione": "aura"
 }
 
 ###
@@ -72,7 +72,7 @@ content-type: application/json
 }
 
 ###
-POST http://classifica.gmasiero.it/admin HTTP/1.1
+POST http://localhost:3000/admin HTTP/1.1
 Authorization: Basic YWRtaW46QGRtaW4h
 content-type: application/json
 

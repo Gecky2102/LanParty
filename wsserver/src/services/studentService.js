@@ -10,7 +10,7 @@ function normalizeSectionName(rawValue) {
     return '';
   }
 
-  return value.slice(0, 20);
+  return value.slice(0, 10);
 }
 
 async function createStudent({ username, sezione, punteggio }) {
