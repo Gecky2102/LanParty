@@ -6,8 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('admin-password');
     const status = document.getElementById('login-status');
 
-    function setStatus(message) {
+    function setStatus(message, type = 'neutral') {
         status.textContent = message;
+        status.classList.remove('status-neutral', 'status-success', 'status-error');
+        if (type === 'success') {
+            status.classList.add('status-success');
+            return;
+        }
+        if (type === 'error') {
+            status.classList.add('status-error');
+            return;
+        }
+        status.classList.add('status-neutral');
     }
 
     async function verifyCredentials(authHeader) {
@@ -28,31 +38,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = passwordInput.value;
 
         if (!username || !password) {
-            setStatus('Inserisci user e password.');
+            setStatus('Inserisci user e password.', 'error');
             return;
         }
 
         const authHeader = `Basic ${btoa(`${username}:${password}`)}`;
-        setStatus('Verifica credenziali in corso...');
+        setStatus('Verifica credenziali in corso...', 'neutral');
 
         try {
             const response = await verifyCredentials(authHeader);
             if (!response.ok) {
-                setStatus('Credenziali non valide.');
+                setStatus('Credenziali non valide.', 'error');
                 return;
             }
 
             sessionStorage.setItem(AUTH_KEY, authHeader);
-            setStatus('Login riuscito, reindirizzamento...');
+            setStatus('Login riuscito, reindirizzamento...', 'success');
             window.location.href = '/admin/dashboard';
         } catch (error) {
-            setStatus('Errore di connessione al server.');
+            setStatus('Errore di connessione al server.', 'error');
         }
     });
 
     const savedAuth = sessionStorage.getItem(AUTH_KEY);
     if (savedAuth) {
-        setStatus('Sessione trovata, apertura dashboard...');
+        setStatus('Sessione trovata, apertura dashboard...', 'neutral');
         window.location.href = '/admin/dashboard';
+    } else {
+        setStatus('Inserisci le credenziali admin.', 'neutral');
     }
 });

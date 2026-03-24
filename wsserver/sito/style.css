@@ -56,16 +56,6 @@ body {
   font-size: 0.98rem;
 }
 
-.admin-link {
-  color: var(--accent);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.admin-link:hover {
-  text-decoration: underline;
-}
-
 .board {
   background: var(--panel);
   border: 1px solid var(--panel-border);

@@ -1,4 +1,6 @@
 :root {
+  --bg: #eef2f7;
+  --bg-2: #f8fafc;
   --text: #1e293b;
   --muted: #5b6472;
   --panel: #ffffff;
@@ -15,22 +17,42 @@ body {
   min-height: 100vh;
   font-family: "Nunito Sans", sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #f8fafc 0%, #f2f5f8 100%);
+  background: linear-gradient(150deg, var(--bg) 0%, var(--bg-2) 100%);
   display: grid;
   place-items: center;
-  padding: 16px;
+  padding: 18px;
 }
 
 .login-page {
-  width: min(460px, 100%);
+  width: min(980px, 100%);
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e1e7ef;
+}
+
+.brand-panel {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(29, 78, 216, 0.16) 0%, transparent 48%),
+    linear-gradient(180deg, #f9fbff 0%, #f1f6ff 100%);
+  padding: 28px;
+}
+
+.feature-list {
+  margin: 18px 0 0;
+  padding-left: 18px;
+  color: #334155;
+  display: grid;
+  gap: 8px;
 }
 
 .login-card {
   background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-  padding: 18px;
+  padding: 28px;
+  display: grid;
+  align-content: center;
 }
 
 .eyebrow {
@@ -45,11 +67,32 @@ body {
 h1 {
   margin: 6px 0 4px;
   font-family: "Literata", serif;
-  font-size: clamp(1.7rem, 3vw, 2.1rem);
+  font-size: clamp(2rem, 3.8vw, 2.6rem);
 }
 
 .subtitle {
   margin: 0 0 14px;
+  color: var(--muted);
+  max-width: 38ch;
+}
+
+.login-eyebrow {
+  margin: 0;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  color: #4b5563;
+}
+
+h2 {
+  margin: 8px 0 6px;
+  font-family: "Literata", serif;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+}
+
+.login-subtitle {
+  margin: 0 0 16px;
   color: var(--muted);
 }
 
@@ -82,12 +125,30 @@ button {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 .status {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.status-neutral {
+  color: #475569;
+}
+
+.status-success {
+  color: #166534;
+}
+
+.status-error {
+  color: #b42318;
 }
 
 .links {
@@ -102,4 +163,18 @@ button {
 
 .links a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 840px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 20px;
+  }
 }

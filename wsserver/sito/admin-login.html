@@ -8,24 +8,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin-login.css" />
+  <link rel="stylesheet" href="/admin-login.css" />
 </head>
 <body>
   <main class="login-page">
-    <section class="login-card">
+    <aside class="brand-panel">
       <p class="eyebrow">Lan Party 2025/2026</p>
-      <h1>Accesso Admin</h1>
-      <p class="subtitle">Autenticati per aprire la dashboard di gestione.</p>
+      <h1>Area Admin</h1>
+      <p class="subtitle">Gestisci classifica, studenti, backup e reset da una dashboard dedicata.</p>
+      <ul class="feature-list">
+        <li>Modifica rapida punteggi</li>
+        <li>Backup JSON in un click</li>
+        <li>Controllo completo classi</li>
+      </ul>
+    </aside>
+
+    <section class="login-card">
+      <p class="login-eyebrow">Accesso riservato</p>
+      <h2>Login amministratore</h2>
+      <p class="login-subtitle">Inserisci le credenziali per continuare.</p>
 
       <form id="login-form" class="login-form">
         <label>
-          User
-          <input id="admin-user" type="text" autocomplete="username" required />
+          Username
+          <input id="admin-user" type="text" autocomplete="username" required placeholder="admin" />
         </label>
 
         <label>
           Password
-          <input id="admin-password" type="password" autocomplete="current-password" required />
+          <input id="admin-password" type="password" autocomplete="current-password" required placeholder="********" />
         </label>
 
         <button type="submit">Accedi</button>
@@ -39,6 +50,6 @@
     </section>
   </main>
 
-  <script src="admin-login.js"></script>
+  <script src="/admin-login.js"></script>
 </body>
 </html>
