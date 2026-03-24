@@ -2,6 +2,13 @@ services:
   node:
     container_name: "node"
     build: ./wsserver
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     ports:
       - "3000:3000"
     networks:
@@ -15,7 +22,8 @@ services:
     container_name: "mysql"
     build: ./mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=cisco
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     volumes:
       - mysql-data:/var/lib/mysql
     networks:

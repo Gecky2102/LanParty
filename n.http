@@ -1,9 +1,46 @@
 
-POST http://classifica.gmasiero.it/studente HTTP/1.1
+POST http://localhost:3000/studente HTTP/1.1
 content-type: application/json
 
 {
     "username": "marino",
     "punteggio": "0",
     "sezione": "2b"
+}
+
+###
+GET http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+
+###
+GET http://localhost:3000/admin/studenti HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+
+###
+POST http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+content-type: application/json
+
+{
+    "action": "backup"
+}
+
+###
+POST http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+content-type: application/json
+
+{
+    "action": "setScore",
+    "id": 1,
+    "punteggio": 100
+}
+
+###
+POST http://localhost:3000/admin HTTP/1.1
+Authorization: Basic YWRtaW46QGRtaW4h
+content-type: application/json
+
+{
+    "action": "reset"
 }
