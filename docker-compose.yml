@@ -21,6 +21,7 @@ services:
       MYSQL_DATABASE: lanparty
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d:ro
     restart: unless-stopped
 
 volumes:

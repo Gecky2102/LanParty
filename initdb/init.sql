@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS studenti (
+  id       INT          NOT NULL AUTO_INCREMENT,
+  username VARCHAR(64)  NOT NULL,
+  sezione  VARCHAR(10)  NOT NULL,
+  punteggio INT         NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
