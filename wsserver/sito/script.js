@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const leaderboard = document.getElementById('leaderboard');
 
-    // Use a configurable API base URL, fallback to the current endpoint.
-    const url = window.API_BASE_URL || 'https://cautious-guide-j6j9xrvj46p2p96-3000.app.github.dev';
+    // Use same-origin by default to avoid CORS in production.
+    const url = window.API_BASE_URL || '';
 
     // Simulazione fetch
     async function fetchLeaderboard() {
