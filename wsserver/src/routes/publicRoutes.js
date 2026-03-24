@@ -17,4 +17,9 @@ router.get('/classeVincitrice', asyncHandler(async (req, res) => {
   res.status(200).json(ranking);
 }));
 
+router.get('/classifiche', asyncHandler(async (req, res) => {
+  const rankings = await studentService.getCombinedRankings();
+  res.status(200).json(rankings);
+}));
+
 module.exports = router;

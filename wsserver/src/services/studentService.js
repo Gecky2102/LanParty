@@ -52,6 +52,26 @@ async function getRankingByClass() {
   return rows;
 }
 
+async function getRankingByPlayer() {
+  const [rows] = await pool.execute(
+    'SELECT s.username, SUM(s.punteggio) AS punteggio FROM studenti s GROUP BY s.username ORDER BY SUM(s.punteggio) DESC'
+  );
+  return rows;
+}
+
+async function getCombinedRankings() {
+  const [teams, players] = await Promise.all([
+    getRankingByClass(),
+    getRankingByPlayer()
+  ]);
+
+  return {
+    teams,
+    players,
+    generatedAt: new Date().toISOString()
+  };
+}
+
 async function resetStudents() {
   await pool.execute('TRUNCATE TABLE studenti');
 }
@@ -154,6 +174,8 @@ module.exports = {
   createStudent,
   listStudents,
   getRankingByClass,
+  getRankingByPlayer,
+  getCombinedRankings,
   resetStudents,
   setStudentScore,
   addStudentScore,

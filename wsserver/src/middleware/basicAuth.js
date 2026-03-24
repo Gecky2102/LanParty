@@ -27,7 +27,6 @@ function requireAdmin(req, res, next) {
   const credentials = parseBasicAuth(req.headers.authorization);
 
   if (!credentials || credentials.username !== env.adminUser || credentials.password !== env.adminPassword) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="LanParty Admin"');
     return res.status(401).json({ message: 'Credenziali admin non valide' });
   }
 

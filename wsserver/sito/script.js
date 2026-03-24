@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const leaderboard = document.getElementById('leaderboard');
+    const teamsPodium = document.getElementById('teams-podium');
+    const playersPodium = document.getElementById('players-podium');
+    const teamsTable = document.getElementById('teams-table');
+    const playersTable = document.getElementById('players-table');
     const status = document.getElementById('status');
     const lastUpdated = document.getElementById('last-updated');
-    const REFRESH_INTERVAL_MS = 15000;
+    const REFRESH_INTERVAL_MS = 5000;
     let isFetching = false;
 
     // Use same-origin by default to avoid CORS in production.
@@ -16,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return new Date().toLocaleTimeString('it-IT');
     }
 
-    function showSingleRow(text, className) {
-        leaderboard.innerHTML = '';
+    function showSingleRow(target, text, className) {
+        target.innerHTML = '';
         const li = document.createElement('li');
         li.className = className;
         li.textContent = text;
-        leaderboard.appendChild(li);
+        target.appendChild(li);
     }
 
     function normalizeSectionName(rawValue) {
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return value.slice(0, 20);
     }
 
-    function buildRow(classe, index) {
+    function buildRow(item, index, labelKey) {
         const li = document.createElement('li');
 
         if (index === 0) {
@@ -59,11 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const section = document.createElement('span');
         section.className = 'section';
-        section.textContent = classe.sezione;
+        section.textContent = item[labelKey];
 
         const points = document.createElement('span');
         points.className = 'points';
-        points.textContent = `${classe.punteggio} pt`;
+        points.textContent = `${item.punteggio} pt`;
 
         rankWrap.appendChild(rankBadge);
         rankWrap.appendChild(section);
@@ -74,6 +77,55 @@ document.addEventListener('DOMContentLoaded', () => {
         return li;
     }
 
+    function buildPodiumRow(item, index, labelKey) {
+        const li = buildRow(item, index, labelKey);
+        const rankWrap = li.querySelector('.rank-wrap');
+        const label = document.createElement('span');
+        label.className = 'podium-label';
+        label.textContent = index === 0 ? '1 posto' : index === 1 ? '2 posto' : '3 posto';
+        rankWrap.prepend(label);
+        return li;
+    }
+
+    function normalizeTeams(rawTeams) {
+        return (Array.isArray(rawTeams) ? rawTeams : [])
+            .map((team) => ({
+                sezione: normalizeSectionName(team.sezione),
+                punteggio: Number(team.punteggio) || 0
+            }))
+            .filter((team) => team.sezione.length > 0)
+            .sort((a, b) => b.punteggio - a.punteggio);
+    }
+
+    function normalizePlayers(rawPlayers) {
+        return (Array.isArray(rawPlayers) ? rawPlayers : [])
+            .map((player) => ({
+                username: String(player.username || '').trim().slice(0, 24),
+                punteggio: Number(player.punteggio) || 0
+            }))
+            .filter((player) => player.username.length > 0)
+            .sort((a, b) => b.punteggio - a.punteggio);
+    }
+
+    function renderRanking(tableTarget, podiumTarget, data, labelKey, emptyText) {
+        tableTarget.innerHTML = '';
+        podiumTarget.innerHTML = '';
+
+        if (data.length === 0) {
+            showSingleRow(tableTarget, emptyText, 'empty-row');
+            showSingleRow(podiumTarget, `Nessun podio disponibile`, 'empty-row');
+            return;
+        }
+
+        data.forEach((item, index) => {
+            tableTarget.appendChild(buildRow(item, index, labelKey));
+        });
+
+        data.slice(0, 3).forEach((item, index) => {
+            podiumTarget.appendChild(buildPodiumRow(item, index, labelKey));
+        });
+    }
+
     async function fetchLeaderboard() {
         if (isFetching) {
             return;
@@ -81,44 +133,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         isFetching = true;
         setStatus('Aggiornamento in corso...');
-        if (leaderboard.children.length === 0 || leaderboard.querySelector('.error-row')) {
-            showSingleRow('Caricamento classifica...', 'loading-row');
+        if (teamsTable.children.length === 0 || teamsTable.querySelector('.error-row')) {
+            showSingleRow(teamsTable, 'Caricamento classifica squadre...', 'loading-row');
+            showSingleRow(playersTable, 'Caricamento classifica giocatori...', 'loading-row');
+            showSingleRow(teamsPodium, 'Caricamento podio squadre...', 'loading-row');
+            showSingleRow(playersPodium, 'Caricamento podio giocatori...', 'loading-row');
         }
 
         try {
-            const response = await fetch(url + '/classeVincitrice');
+            const response = await fetch(url + '/classifiche');
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
             }
 
             const data = await response.json();
-            leaderboard.innerHTML = '';
 
-            const cleanData = (Array.isArray(data) ? data : [])
-                .map((classe) => ({
-                    sezione: normalizeSectionName(classe.sezione),
-                    punteggio: Number(classe.punteggio) || 0
-                }))
-                .filter((classe) => classe.sezione.length > 0)
-                .sort((a, b) => b.punteggio - a.punteggio);
+            const teamRanking = normalizeTeams(data.teams);
+            const playerRanking = normalizePlayers(data.players);
 
-            if (cleanData.length === 0) {
-                showSingleRow('Nessun punteggio disponibile', 'empty-row');
-                setStatus('Classifica vuota');
-                lastUpdated.textContent = formatNow();
-                return;
-            }
+            renderRanking(teamsTable, teamsPodium, teamRanking, 'sezione', 'Nessuna squadra disponibile');
+            renderRanking(playersTable, playersPodium, playerRanking, 'username', 'Nessun giocatore disponibile');
 
-            cleanData.forEach((classe, index) => {
-                leaderboard.appendChild(buildRow(classe, index));
-            });
-
-            setStatus(`Classifica aggiornata: ${cleanData.length} classi`);
+            setStatus(`Classifiche aggiornate: ${teamRanking.length} squadre, ${playerRanking.length} giocatori`);
             lastUpdated.textContent = formatNow();
         } catch (error) {
             console.error('Fetch error:', error);
-            showSingleRow('Impossibile caricare la classifica', 'error-row');
-            setStatus('Errore di connessione al server');
+            showSingleRow(teamsTable, 'Impossibile caricare classifica squadre', 'error-row');
+            showSingleRow(playersTable, 'Impossibile caricare classifica giocatori', 'error-row');
+            showSingleRow(teamsPodium, 'Podio non disponibile', 'error-row');
+            showSingleRow(playersPodium, 'Podio non disponibile', 'error-row');
+            setStatus('Errore di connessione al server classifiche');
         } finally {
             isFetching = false;
         }

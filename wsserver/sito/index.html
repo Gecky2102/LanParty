@@ -14,24 +14,52 @@
   <main class="page">
     <header class="hero">
       <p class="eyebrow">Lan Party 2025/2026</p>
-      <h1>Classifica Classi</h1>
-      <p class="subtitle">Punteggi aggiornati in tempo reale dal server locale.</p>
+      <h1>Classifiche Lan Party</h1>
+      <p class="subtitle">Podio Top 3 e tabelle complete per squadre e giocatori.</p>
     </header>
 
     <section class="board" aria-live="polite">
       <div class="board-top">
-        <p id="status" class="status">Caricamento classifica...</p>
+        <p id="status" class="status">Caricamento classifiche...</p>
       </div>
 
-      <div class="leaderboard-head" aria-hidden="true">
-        <span>Pos.</span>
-        <span>Classe</span>
-        <span>Punti</span>
-      </div>
+      <div class="ranking-grid">
+        <section class="ranking-card" aria-labelledby="teams-title">
+          <h2 id="teams-title">Classifica Squadre</h2>
 
-      <ul id="leaderboard" class="leaderboard">
-        <li class="loading-row">Caricamento...</li>
-      </ul>
+          <ol id="teams-podium" class="podium-list">
+            <li class="loading-row">Caricamento podio squadre...</li>
+          </ol>
+
+          <div class="leaderboard-head" aria-hidden="true">
+            <span>Pos.</span>
+            <span>Squadra</span>
+            <span>Punti</span>
+          </div>
+
+          <ul id="teams-table" class="leaderboard">
+            <li class="loading-row">Caricamento classifica squadre...</li>
+          </ul>
+        </section>
+
+        <section class="ranking-card" aria-labelledby="players-title">
+          <h2 id="players-title">Classifica Giocatori</h2>
+
+          <ol id="players-podium" class="podium-list">
+            <li class="loading-row">Caricamento podio giocatori...</li>
+          </ol>
+
+          <div class="leaderboard-head" aria-hidden="true">
+            <span>Pos.</span>
+            <span>Giocatore</span>
+            <span>Punti</span>
+          </div>
+
+          <ul id="players-table" class="leaderboard">
+            <li class="loading-row">Caricamento classifica giocatori...</li>
+          </ul>
+        </section>
+      </div>
 
       <footer class="board-footer">
         <span>Ultimo aggiornamento:</span>
