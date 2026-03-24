@@ -292,9 +292,9 @@ body {
 
 .leaderboard-head {
   display: grid;
-  grid-template-columns: 76px 1fr auto;
+  grid-template-columns: 44px 1fr auto;
   gap: 12px;
-  padding: 0 14px 9px;
+  padding: 0 16px 9px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
@@ -323,10 +323,15 @@ body {
   border-radius: 10px;
   padding: 13px 16px;
   display: grid;
-  grid-template-columns: 76px 1fr auto;
+  grid-template-columns: 44px 1fr auto;
   align-items: center;
   gap: 12px;
   transition: border-color 150ms ease, transform 150ms ease;
+}
+
+/* Promuove badge e nome a colonne separate della griglia */
+.leaderboard .rank-wrap {
+  display: contents;
 }
 
 .leaderboard li:hover {
@@ -334,7 +339,13 @@ body {
   transform: translateX(2px);
 }
 
-/* Righe stato */
+/* Righe stato — ripristina il rank-wrap come blocco normale */
+.leaderboard .loading-row .rank-wrap,
+.leaderboard .error-row .rank-wrap,
+.leaderboard .empty-row .rank-wrap {
+  display: flex;
+}
+
 .loading-row,
 .error-row,
 .empty-row {
