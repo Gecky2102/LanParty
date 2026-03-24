@@ -23,8 +23,22 @@ async function waitForDb(retries = 0) {
   }
 }
 
+async function ensureSchema() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS studenti (
+      id        INT         NOT NULL AUTO_INCREMENT,
+      username  VARCHAR(64) NOT NULL,
+      sezione   VARCHAR(10) NOT NULL,
+      punteggio INT         NOT NULL DEFAULT 0,
+      PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+  `);
+  console.log('Schema ready.');
+}
+
 async function startServer() {
   await waitForDb();
+  await ensureSchema();
   app.listen(env.port, () => {
     console.log(`Server running at http://localhost:${env.port}`);
   });
