@@ -6,10 +6,10 @@ services:
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      ADMIN_USER: ${ADMIN_USER}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      MYSQL_ROOT_PASSWORD: cisco
+      MYSQL_DATABASE: lanparty
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: "@dmin!"
     depends_on:
       - mysql
     restart: unless-stopped
@@ -17,8 +17,8 @@ services:
   mysql:
     image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: cisco
+      MYSQL_DATABASE: lanparty
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
