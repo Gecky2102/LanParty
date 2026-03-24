@@ -39,6 +39,8 @@ app.post('/admin/login-check', (req, res) => {
   const { username, password } = req.body || {};
   const ok = username === env.adminUser && password === env.adminPassword;
 
+  console.log(`[login-check] user="${username}" ok=${ok} expected_user="${env.adminUser}"`);
+
   if (!ok) {
     return res.status(200).json({ ok: false, message: 'Credenziali admin non valide' });
   }
