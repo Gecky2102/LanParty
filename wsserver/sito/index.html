@@ -3,17 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Classifica Videogioco</title>
+  <title>Lan Party - Classifica Classi</title>
   <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Classifica Classi</h1>
-    <ul id="leaderboard">
-      <li>Caricamento...</li>
-    </ul>
-  </div>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">Lan Party 2025/2026</p>
+      <h1>Classifica Classi</h1>
+      <p class="subtitle">Punteggi aggiornati in tempo reale dal server locale.</p>
+    </header>
+
+    <section class="board" aria-live="polite">
+      <div class="board-top">
+        <p id="status" class="status">Caricamento classifica...</p>
+      </div>
+
+      <div class="leaderboard-head" aria-hidden="true">
+        <span>Pos.</span>
+        <span>Classe</span>
+        <span>Punti</span>
+      </div>
+
+      <ul id="leaderboard" class="leaderboard">
+        <li class="loading-row">Caricamento...</li>
+      </ul>
+
+      <footer class="board-footer">
+        <span>Ultimo aggiornamento:</span>
+        <span id="last-updated">--:--:--</span>
+      </footer>
+    </section>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>

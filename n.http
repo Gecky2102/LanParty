@@ -1,5 +1,5 @@
 
-POST http://localhost:3000/studente HTTP/1.1
+POST http://classifica.gmasiero.it/studente HTTP/1.1
 content-type: application/json
 
 {
