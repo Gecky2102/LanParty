@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const leaderboard = document.getElementById('leaderboard');
 
-    // Simulazione di una API (puoi sostituire con fetch da un vero endpoint)
-    const url = 'https://cautious-guide-j6j9xrvj46p2p96-3000.app.github.dev'; // da sostituire
+    // Use a configurable API base URL, fallback to the current endpoint.
+    const url = window.API_BASE_URL || 'https://cautious-guide-j6j9xrvj46p2p96-3000.app.github.dev';
 
     // Simulazione fetch
     async function fetchLeaderboard() {
-        var res;
         fetch(url + "/classeVincitrice")
             .then(response => {
                 if (!response.ok) {
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 console.log(data)
-                res = data;
                 data.forEach(classe => {
                     console.log(classe.sezione, " ", classe.punteggio);
                 });

@@ -4,9 +4,26 @@ const app = express();
 const path = require('path');
 const port = 3000;
 
+// Allow cross-origin requests from static sites consuming this API.
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'sito')));
+
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end();
+});
 
 var con = mysql.createConnection({
   host: "mysql",
@@ -54,7 +71,7 @@ app.get('/classeVincitrice', (req,res) => {
       return;
     }
     console.log(`classifica calcolata: ${result}`);
-    res.status(201).send(result);
+    res.status(200).send(result);
   });
 })
 
