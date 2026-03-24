@@ -89,6 +89,31 @@ h2 {
   padding: 10px 14px;
 }
 
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat-item {
+  border: 1px solid #e6ecf4;
+  border-radius: 12px;
+  background: #f9fbff;
+  padding: 10px 12px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-family: "Literata", serif;
+}
+
 label {
   display: grid;
   gap: 6px;
@@ -165,6 +190,13 @@ button:disabled {
   margin-bottom: 8px;
 }
 
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
 .rows-info {
   color: var(--muted);
   font-size: 0.88rem;
@@ -193,6 +225,10 @@ th {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 1;
 }
 
 .placeholder {
@@ -214,10 +250,27 @@ th {
 
 .score-input,
 .delta-input,
-.sezione-input {
+.sezione-input,
+.username-input {
   width: 90px;
   padding: 6px 8px;
   font-size: 0.85rem;
+}
+
+.username-input {
+  width: 150px;
+}
+
+.message-neutral {
+  color: #475569;
+}
+
+.message-success {
+  color: #166534;
+}
+
+.message-error {
+  color: #b42318;
 }
 
 @media (max-width: 760px) {
@@ -231,6 +284,14 @@ th {
   }
 
   .inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
     grid-template-columns: 1fr;
   }
 }

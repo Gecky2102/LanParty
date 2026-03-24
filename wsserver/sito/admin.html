@@ -28,6 +28,23 @@
       <p id="auth-status" class="status">Sessione admin attiva.</p>
     </section>
 
+    <section class="card stats-card">
+      <div class="stats-grid">
+        <article class="stat-item">
+          <span class="stat-label">Totale studenti</span>
+          <strong id="stat-students" class="stat-value">0</strong>
+        </article>
+        <article class="stat-item">
+          <span class="stat-label">Totale punti</span>
+          <strong id="stat-points" class="stat-value">0</strong>
+        </article>
+        <article class="stat-item">
+          <span class="stat-label">Classe top</span>
+          <strong id="stat-top-class" class="stat-value">-</strong>
+        </article>
+      </div>
+    </section>
+
     <section class="card tools-card">
       <h2>Operazioni Database</h2>
       <div class="actions wrap">
@@ -53,6 +70,18 @@
         <h2>Studenti</h2>
         <span id="rows-info" class="rows-info">0 record</span>
       </div>
+
+      <div class="filters">
+        <input id="search-input" type="search" placeholder="Cerca per username o sezione" />
+        <select id="sort-select">
+          <option value="id-asc">Ordina: ID crescente</option>
+          <option value="id-desc">Ordina: ID decrescente</option>
+          <option value="score-desc">Ordina: punteggio decrescente</option>
+          <option value="score-asc">Ordina: punteggio crescente</option>
+          <option value="name-asc">Ordina: username A-Z</option>
+        </select>
+      </div>
+
       <div class="table-wrap">
         <table>
           <thead>
@@ -71,7 +100,8 @@
           </tbody>
         </table>
       </div>
-      <p id="action-status" class="status">Pronto.</p>
+
+      <p id="action-status" class="status message-neutral">Pronto.</p>
     </section>
   </main>
 
