@@ -1,13 +1,10 @@
 :root {
-  --bg:             #eef2f7;
-  --surface:        #ffffff;
-  --surface-2:      #f8fafc;
-  --border:         #e2e8f0;
-  --border-strong:  #c8d4e3;
-  --text:           #1e293b;
-  --muted:          #64748b;
-  --accent:         #2563eb;
-  --accent-dim:     #eff6ff;
+  --bg:      #eef2f7;
+  --surface: #ffffff;
+  --border:  #e2e8f0;
+  --text:    #1e293b;
+  --muted:   #64748b;
+  --accent:  #2563eb;
 }
 
 *, *::before, *::after {
@@ -26,208 +23,93 @@ body {
   padding: 24px;
 }
 
-/* ── Split layout ─────────────────────────────────────────────── */
-
 .login-page {
-  width: min(940px, 100%);
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  border-radius: 20px;
-  overflow: hidden;
+  width: min(420px, 100%);
+  background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow:
-    0 2px 8px rgba(15, 23, 42, 0.05),
-    0 16px 48px rgba(15, 23, 42, 0.1);
-}
-
-/* ── Brand panel ──────────────────────────────────────────────── */
-
-.brand-panel {
-  background: linear-gradient(150deg, #1e40af 0%, #1d4ed8 55%, #2563eb 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
   padding: 40px 36px;
-  display: grid;
-  align-content: center;
-  gap: 6px;
-  position: relative;
-  overflow: hidden;
 }
 
-/* Pattern decorativo */
-.brand-panel::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 260px; height: 260px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  pointer-events: none;
-}
-
-.brand-panel::after {
-  content: '';
-  position: absolute;
-  bottom: -80px; left: -40px;
-  width: 300px; height: 300px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  pointer-events: none;
-}
-
-.eyebrow {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-  position: relative;
-}
-
-h1 {
-  font-family: 'Literata', serif;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.1;
-  color: #fff;
-  margin: 12px 0 10px;
-  position: relative;
-}
-
-.subtitle {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.92rem;
-  max-width: 30ch;
-  line-height: 1.65;
-  margin-bottom: 22px;
-  position: relative;
-}
-
-.feature-list {
-  list-style: none;
-  display: grid;
-  gap: 10px;
-  position: relative;
-}
-
-.feature-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.feature-list li::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* ── Login card ───────────────────────────────────────────────── */
+/* nasconde il pannello brand su questa versione semplificata */
+.brand-panel { display: none; }
 
 .login-card {
-  background: var(--surface);
-  padding: 40px 36px;
   display: grid;
-  align-content: center;
-  gap: 4px;
+  gap: 0;
 }
 
 .login-eyebrow {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
+  margin-bottom: 6px;
 }
 
 h2 {
   font-family: 'Literata', serif;
-  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--text);
-  margin: 10px 0 6px;
+  margin-bottom: 4px;
 }
 
 .login-subtitle {
   color: var(--muted);
-  font-size: 0.88rem;
-  margin-bottom: 22px;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
 }
-
-/* ── Form ─────────────────────────────────────────────────────── */
 
 .login-form {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 label {
   display: grid;
-  gap: 7px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--muted);
 }
 
 input {
-  background: var(--surface-2);
+  background: #f8fafc;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 11px 13px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   color: var(--text);
   outline: none;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-input::placeholder { color: var(--muted); opacity: 0.5; }
+input::placeholder { color: #94a3b8; }
 
 input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-  background: var(--surface);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 button[type="submit"] {
   margin-top: 4px;
   width: 100%;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-radius: 8px;
   padding: 12px;
   border: none;
+  border-radius: 8px;
   background: var(--accent);
   color: #fff;
-  position: relative;
-  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
   transition: filter 150ms ease, transform 150ms ease;
-}
-
-button[type="submit"]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
-  transform: translateX(-100%);
-  transition: transform 480ms ease;
-}
-
-button[type="submit"]:hover::after {
-  transform: translateX(100%);
 }
 
 button[type="submit"]:hover {
@@ -237,53 +119,37 @@ button[type="submit"]:hover {
 
 button[type="submit"]:active { transform: none; }
 
-/* ── Status ───────────────────────────────────────────────────── */
-
 .status {
   margin-top: 14px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
   min-height: 1.2em;
+  text-align: center;
 }
 
 .status-neutral { color: var(--muted); }
 .status-success { color: #16a34a; }
-.status-error   { color: #dc2626; }
+.status-error   { color: #dc2626; font-weight: 600; }
 
-/* ── Links ────────────────────────────────────────────────────── */
-
-.links { margin-top: 14px; }
+.links {
+  margin-top: 20px;
+  text-align: center;
+}
 
 .links a {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
   color: var(--accent);
   text-decoration: none;
-  opacity: 0.7;
+  opacity: 0.75;
   transition: opacity 150ms ease;
 }
 
 .links a:hover { opacity: 1; }
 
-/* ── Responsive ───────────────────────────────────────────────── */
+/* il login-page ora è solo il card — rimuovi il layout a due colonne */
+.login-page {
+  grid-template-columns: 1fr;
+}
 
-@media (max-width: 800px) {
-  .login-page {
-    grid-template-columns: 1fr;
-    max-width: 440px;
-  }
-
-  .brand-panel {
-    padding: 28px;
-  }
-
-  .login-card {
-    padding: 28px;
-  }
+@media (max-width: 480px) {
+  .login-page { padding: 28px 22px; }
 }

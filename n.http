@@ -3,9 +3,9 @@ POST http://classifica.gmasiero.it/studente HTTP/1.1
 content-type: application/json
 
 {
-    "username": "provaa",
-    "punteggio": "100",
-    "sezione": "aura"
+    "username": "6",
+    "punteggio": "1",
+    "sezione": "test"
 }
 
 ###
