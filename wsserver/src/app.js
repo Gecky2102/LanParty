@@ -1,12 +1,15 @@
-const express = require('express');
-const path = require('path');
-const env = require('./config/env');
-const publicRoutes = require('./routes/publicRoutes');
-const adminRoutes = require('./routes/adminRoutes');
-const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import env from './config/env.js';
+import publicRoutes from './routes/publicRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import { notFoundHandler, errorHandler } from './middleware/errorHandler.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const staticDir = path.join(__dirname, '..', 'sito');
+const staticDir = join(__dirname, '..', 'sito');
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', env.corsOrigin);
@@ -28,11 +31,11 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 app.get('/admin/dashboard', (req, res) => {
-  res.sendFile(path.join(staticDir, 'admin.html'));
+  res.sendFile(join(staticDir, 'admin.html'));
 });
 
 app.get('/admin/login', (req, res) => {
-  res.sendFile(path.join(staticDir, 'admin-login.html'));
+  res.sendFile(join(staticDir, 'admin-login.html'));
 });
 
 app.post('/admin/login-check', (req, res) => {
@@ -54,4 +57,4 @@ app.use(adminRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

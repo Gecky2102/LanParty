@@ -1,8 +1,8 @@
-function notFoundHandler(req, res) {
+export function notFoundHandler(req, res) {
   res.status(404).json({ message: 'Endpoint non trovato' });
 }
 
-function errorHandler(error, req, res, next) {
+export function errorHandler(error, req, res, next) {
   if (res.headersSent) {
     return next(error);
   }
@@ -16,8 +16,3 @@ function errorHandler(error, req, res, next) {
     message: error.publicMessage || 'Errore interno del server'
   });
 }
-
-module.exports = {
-  notFoundHandler,
-  errorHandler
-};

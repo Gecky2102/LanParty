@@ -1,3 +1,5 @@
+import './dotenv.js';
+
 const DEFAULTS = {
   port: 3000,
   mysqlHost: 'mysql',
@@ -27,4 +29,4 @@ const env = {
   corsOrigin: process.env.CORS_ORIGIN || DEFAULTS.corsOrigin
 };
 
-module.exports = env;
+export default env;

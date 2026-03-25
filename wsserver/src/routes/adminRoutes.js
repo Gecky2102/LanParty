@@ -1,9 +1,9 @@
-const express = require('express');
-const asyncHandler = require('../utils/asyncHandler');
-const { requireAdmin } = require('../middleware/basicAuth');
-const studentService = require('../services/studentService');
+import { Router } from 'express';
+import asyncHandler from '../utils/asyncHandler.js';
+import { requireAdmin } from '../middleware/basicAuth.js';
+import * as studentService from '../services/studentService.js';
 
-const router = express.Router();
+const router = Router();
 
 router.use(requireAdmin);
 
@@ -18,20 +18,7 @@ router.get('/admin', asyncHandler(async (req, res) => {
       'addScore',
       'deleteStudent',
       'updateStudent'
-    ],
-    usage: {
-      endpoint: '/admin',
-      method: 'POST',
-      bodyExamples: [
-        { action: 'reset' },
-        { action: 'backup' },
-        { action: 'createStudent', username: 'nuovo', sezione: '2B', punteggio: 0 },
-        { action: 'setScore', id: 1, punteggio: 25 },
-        { action: 'addScore', id: 1, delta: 5 },
-        { action: 'updateStudent', id: 1, username: 'mario', sezione: '3A', punteggio: 30 },
-        { action: 'deleteStudent', id: 1 }
-      ]
-    }
+    ]
   });
 }));
 
@@ -93,4 +80,4 @@ router.post('/admin', asyncHandler(async (req, res) => {
   return res.status(400).json({ message: 'Azione non supportata' });
 }));
 
-module.exports = router;
+export default router;

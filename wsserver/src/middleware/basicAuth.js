@@ -1,4 +1,4 @@
-const env = require('../config/env');
+import env from '../config/env.js';
 
 function parseBasicAuth(authHeader) {
   if (!authHeader || !authHeader.startsWith('Basic ')) {
@@ -23,7 +23,7 @@ function parseBasicAuth(authHeader) {
   }
 }
 
-function requireAdmin(req, res, next) {
+export function requireAdmin(req, res, next) {
   const credentials = parseBasicAuth(req.headers.authorization);
 
   if (!credentials || credentials.username !== env.adminUser || credentials.password !== env.adminPassword) {
@@ -32,7 +32,3 @@ function requireAdmin(req, res, next) {
 
   return next();
 }
-
-module.exports = {
-  requireAdmin
-};

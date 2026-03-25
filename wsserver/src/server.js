@@ -1,9 +1,6 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../.env'), override: true });
-
-const app = require('./app');
-const env = require('./config/env');
-const pool = require('./db/pool');
+import app from './app.js';
+import env from './config/env.js';
+import pool from './db/pool.js';
 
 const RETRY_DELAY_MS = 3000;
 const MAX_RETRIES = 20;

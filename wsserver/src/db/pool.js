@@ -1,5 +1,5 @@
-const mysql = require('mysql2/promise');
-const env = require('../config/env');
+import mysql from 'mysql2/promise';
+import env from '../config/env.js';
 
 const pool = mysql.createPool({
   host: env.mysqlHost,
@@ -11,4 +11,4 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-module.exports = pool;
+export default pool;

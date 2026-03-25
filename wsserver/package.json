@@ -2,6 +2,7 @@
     "name": "lanparty-server",
     "version": "1.0.0",
     "description": "Lan Party score service with public leaderboard and admin dashboard",
+    "type": "module",
     "main": "src/server.js",
     "scripts": {
         "start": "node src/server.js",

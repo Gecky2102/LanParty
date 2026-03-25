@@ -1,4 +1,4 @@
-const pool = require('../db/pool');
+import pool from '../db/pool.js';
 
 function validateNumber(value) {
   return Number.isFinite(Number(value));
@@ -13,7 +13,7 @@ function normalizeSectionName(rawValue) {
   return value.slice(0, 10);
 }
 
-async function createStudent({ username, sezione, punteggio }) {
+export async function createStudent({ username, sezione, punteggio }) {
   const normalizedName = String(username || '').trim();
   const normalizedSection = normalizeSectionName(sezione);
   const normalizedScore = Number(punteggio);
@@ -38,28 +38,28 @@ async function createStudent({ username, sezione, punteggio }) {
   };
 }
 
-async function listStudents() {
+export async function listStudents() {
   const [rows] = await pool.execute(
     'SELECT id, username, punteggio, sezione FROM studenti ORDER BY id ASC'
   );
   return rows;
 }
 
-async function getRankingByClass() {
+export async function getRankingByClass() {
   const [rows] = await pool.execute(
     'SELECT s.sezione, SUM(s.punteggio) AS punteggio FROM studenti s GROUP BY s.sezione ORDER BY SUM(s.punteggio) DESC'
   );
   return rows;
 }
 
-async function getRankingByPlayer() {
+export async function getRankingByPlayer() {
   const [rows] = await pool.execute(
     'SELECT s.username, SUM(s.punteggio) AS punteggio FROM studenti s GROUP BY s.username ORDER BY SUM(s.punteggio) DESC'
   );
   return rows;
 }
 
-async function getCombinedRankings() {
+export async function getCombinedRankings() {
   const [teams, players] = await Promise.all([
     getRankingByClass(),
     getRankingByPlayer()
@@ -72,11 +72,11 @@ async function getCombinedRankings() {
   };
 }
 
-async function resetStudents() {
+export async function resetStudents() {
   await pool.execute('TRUNCATE TABLE studenti');
 }
 
-async function setStudentScore({ id, punteggio }) {
+export async function setStudentScore({ id, punteggio }) {
   const numericId = Number(id);
   const numericScore = Number(punteggio);
 
@@ -100,7 +100,7 @@ async function setStudentScore({ id, punteggio }) {
   }
 }
 
-async function addStudentScore({ id, delta }) {
+export async function addStudentScore({ id, delta }) {
   const numericId = Number(id);
   const numericDelta = Number(delta);
 
@@ -124,7 +124,7 @@ async function addStudentScore({ id, delta }) {
   }
 }
 
-async function deleteStudent({ id }) {
+export async function deleteStudent({ id }) {
   const numericId = Number(id);
 
   if (!Number.isInteger(numericId)) {
@@ -144,7 +144,7 @@ async function deleteStudent({ id }) {
   }
 }
 
-async function updateStudent({ id, username, sezione, punteggio }) {
+export async function updateStudent({ id, username, sezione, punteggio }) {
   const numericId = Number(id);
   const normalizedName = String(username || '').trim();
   const normalizedSection = normalizeSectionName(sezione);
@@ -169,16 +169,3 @@ async function updateStudent({ id, username, sezione, punteggio }) {
     throw error;
   }
 }
-
-module.exports = {
-  createStudent,
-  listStudents,
-  getRankingByClass,
-  getRankingByPlayer,
-  getCombinedRankings,
-  resetStudents,
-  setStudentScore,
-  addStudentScore,
-  deleteStudent,
-  updateStudent
-};

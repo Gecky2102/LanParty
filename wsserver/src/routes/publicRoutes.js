@@ -1,8 +1,8 @@
-const express = require('express');
-const asyncHandler = require('../utils/asyncHandler');
-const studentService = require('../services/studentService');
+import { Router } from 'express';
+import asyncHandler from '../utils/asyncHandler.js';
+import * as studentService from '../services/studentService.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/studente', asyncHandler(async (req, res) => {
   const student = await studentService.createStudent(req.body || {});
@@ -22,4 +22,4 @@ router.get('/classifiche', asyncHandler(async (req, res) => {
   res.status(200).json(rankings);
 }));
 
-module.exports = router;
+export default router;
