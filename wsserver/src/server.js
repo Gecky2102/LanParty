@@ -36,9 +36,24 @@ async function ensureSchema() {
   console.log('Schema ready.');
 }
 
+async function logDbSnapshot() {
+  const [[{ total }]] = await pool.query('SELECT COUNT(*) AS total FROM studenti');
+  console.log(`Studenti nel DB: ${total}`);
+
+  if (total > 0) {
+    const [rows] = await pool.query(
+      'SELECT username, sezione, punteggio FROM studenti ORDER BY punteggio DESC LIMIT 10'
+    );
+    rows.forEach((r, i) => {
+      console.log(`  ${i + 1}. ${r.username} (${r.sezione}) — ${r.punteggio} pt`);
+    });
+  }
+}
+
 async function startServer() {
   await waitForDb();
   await ensureSchema();
+  await logDbSnapshot();
   app.listen(env.port, () => {
     console.log(`Server running at http://localhost:${env.port}`);
   });

@@ -16,7 +16,7 @@ Authorization: Basic YWRtaW46QGRtaW4h
 GET http://classifica.gmasiero.it/admin/studenti HTTP/1.1
 Authorization: Basic YWRtaW46QGRtaW4h
 
-###
+###\
 POST http://classifica.gmasiero.it/admin HTTP/1.1
 Authorization: Basic YWRtaW46QGRtaW4h
 content-type: application/json
